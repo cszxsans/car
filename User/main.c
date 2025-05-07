@@ -45,7 +45,6 @@ int main()
 	Target3 = -0.5/0.033;
 	while(1)
 	{
-		//更改
 		if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 0){
 			current = Location1;
 			Target1 = 1.155/0.033;
