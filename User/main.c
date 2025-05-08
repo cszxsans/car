@@ -8,6 +8,7 @@
 #include "Delay.h"
 #include "Serial.h"
 #include "Key.h"
+#include "systick.h"
 #include<math.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -26,6 +27,9 @@ float Error02,Error12,Error22;
 float Target3,Actual3,Out3;
 float Kp3 = 0.58,Ki3 = 0.1,Kd3;
 float Error03,Error13,Error23;
+
+
+float vxg,vyg;
 int main()
 {
     
@@ -33,56 +37,32 @@ int main()
 	OLED_Init();
 	Timer_Init();
 	Encoder_Init();
+	SysTick_Init();
 	
 	Motor_Setspeed1(0);
 	Motor_Setspeed2(0);
 	Motor_Setspeed3(0);
 	OLED_Clear();
-	int16_t current = Location2;
-	uint8_t state = 0;
-	Target1 = -0.5/0.033;
-	Target2 = 1/0.033;
-	Target3 = -0.5/0.033;
+	
+	float start_time;
+    start_time = GetCurrentTime();
+	
 	while(1)
 	{
-		if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 0){
-			current = Location1;
-			Target1 = 1.155/0.033;
-			Target2 = 0;
-			Target3 = -1.155/0.033;
-			state++;
-		}
-		if(abs(Location1 - current) <= 2*1500 + 50 && abs(Location1 - current) >= 2*1500 - 50 && state == 1){
-			current = Location2;
-			Target1 = 0.5/0.033;
-			Target2 = -1/0.033;
-			Target3 = 0.5/0.033;
-			state++;
-		}
-		if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 2){
-			current = Location1;
-			Target1 = -1.155/0.033;
-			Target2 = 0;
-			Target3 = 1.155/0.033;
-			state++;
-		}
-		if(abs(Location1 - current) <= 2*1500 + 50 && abs(Location1 - current) >= 2*1500 - 50 && state == 3){
-			Target1 = 0;
-			Target2 = 0;
-			Target3 = 0;
-		}
-		//}
-		OLED_ShowSignedNum(2,1,Actual1,5);
-        OLED_ShowSignedNum(1,1,Location1,5);
+		float vx,vy;
+		Circular(&vx,&vy,start_time,30);
+		Target1 = (vy*sqrt(3)/2 - vx/2);
+		Target2 = vx;
+		Target3 = (-vy*sqrt(3)/2 - vx/2);
+		OLED_ShowSignedNum(2,1,vx,5);
+        OLED_ShowSignedNum(1,1,vy,5);
 		OLED_ShowSignedNum(4,1,Actual2,5);   
         OLED_ShowSignedNum(3,1,Location2,5);
 		OLED_ShowSignedNum(2,8,Actual3,5);   
         OLED_ShowSignedNum(1,8,Location3,5);
-		OLED_ShowSignedNum(3,8,abs(Location2 - current),5);   
-        OLED_ShowSignedNum(4,8,state,5);
+//		OLED_ShowSignedNum(3,8,abs(Location2 - current),5);   
+//        OLED_ShowSignedNum(4,8,25555,5);
     }
-     
-    
 }
 
 void TIM8_UP_IRQHandler(void)

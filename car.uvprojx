@@ -751,6 +751,16 @@
               <FileType>5</FileType>
               <FilePath>.\hardware\Key.h</FilePath>
             </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware\systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware\systick.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
