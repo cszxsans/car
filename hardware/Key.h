@@ -2,5 +2,5 @@
 #define __KEY_H
 
 void Key_Init(void);
-uint8_t Key_Getnum(void);
+uint8_t Key_Getnum(uint8_t Keynum);
 #endif

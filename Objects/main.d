@@ -38,6 +38,5 @@
 .\objects\main.o: .\hardware\Serial.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\hardware\Key.h
-.\objects\main.o: .\hardware\systick.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
