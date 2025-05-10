@@ -64,32 +64,32 @@ int main()
 				Location1 = 0;
 				Location2 = 0;
 				Location3 = 0;
-				Target1 = -0.5/0.033;
-				Target2 = 1/0.033;
-				Target3 = -0.5/0.033;
+				Target1 = -1/0.033;
+				Target2 = 2/0.033;
+				Target3 = -1/0.033;
 				current = Location2;
 				state = 0;
 				a = 1;
 			}
 			if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 0){
 				current = Location1;
-				Target1 = 1.155/0.033;
+				Target1 = 2.309/0.033;
 				Target2 = 0;
-				Target3 = -1.155/0.033;
+				Target3 = -2.309/0.033;
 				state++;
 			}
 			if(abs(Location1 - current) <= 2*1500 + 50 && abs(Location1 - current) >= 2*1500 - 50 && state == 1){
 				current = Location2;
-				Target1 = 0.5/0.033;
-				Target2 = -1/0.033;
-				Target3 = 0.5/0.033;
+				Target1 = 1/0.033;
+				Target2 = -2/0.033;
+				Target3 = 1/0.033;
 				state++;
 			}
 			if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 2){
 				current = Location1;
-				Target1 = -1.155/0.033;
+				Target1 = -2.309/0.033;
 				Target2 = 0;
-				Target3 = 1.155/0.033;
+				Target3 = 2.309/0.033;
 				state++;
 			}
 			if(abs(Location1 - current) <= 2*1500 + 50 && abs(Location1 - current) >= 2*1500 - 50 && state == 3){
@@ -103,25 +103,25 @@ int main()
 				Location1 = 0;
 				Location2 = 0;
 				Location3 = 0;
-				Target1 = -0.5/0.033;
-				Target2 = 1/0.033;
-				Target3 = -0.5/0.033;
+				Target1 = -1/0.033;
+				Target2 = 2/0.033;
+				Target3 = -1/0.033;
 				current = Location2;
 				state = 0;
 				a = 0;
 			}
 			if(abs(Location2 - current) <= 2*1500 + 50 && abs(Location2 - current) >= 2*1500 - 50 && state == 0){
 				current = Location1;
-				Target1 = 1/0.033;
-				Target2 = -0.5/0.033;
-				Target3 = -0.5/0.033;
+				Target1 = 2/0.033;
+				Target2 = -1/0.033;
+				Target3 = -1/0.033;
 				state++;
 			}
 			if(abs(Location1 - current) <= 2*1500 + 50 && abs(Location1 - current) >= 2*1500 - 50 && state == 1){
 				current = Location3;
-				Target1 = -0.5/0.033;
-				Target2 = -0.5/0.033;
-				Target3 = 1/0.033;
+				Target1 = -1/0.033;
+				Target2 = -1/0.033;
+				Target3 = 2/0.033;
 				state++;
 			}
 			if(abs(Location3 - current) <= 2*1500 + 50 && abs(Location3 - current) >= 2*1500 - 50 && state == 2){
@@ -135,12 +135,13 @@ int main()
 				nt = time/1000.0f;
 				a = 1;
 			}
-			Circular(&vx,&vy,nt,30);
+			Circular(&vx,&vy,nt,50);
 			Target1 = (vy*sqrt(3)/2 - vx/2);
 			Target2 = vx;
 			Target3 = (-vy*sqrt(3)/2 - vx/2);
 		}
 		if(Keynum % 4 == 0){
+			a = 0;
 			Target1 = 0;
 			Target2 = 0;
 			Target3 = 0;
